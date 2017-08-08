@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>simplifyForm</title>
+
+	<script type="text/javascript" src="../simplifyForm.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+	<h1></h1>
+
+	<h2>Request data</h2>
+	<p>For send a data from form is required the register of form, use some parameters to define the request</p>
+
+	<form class="forms" name="example1-form">		
+		<input type="submit" value="submit"/>
+		<div id="resultForm-example1"></div>
+	</form>
+
+	<br>
+
+	<fieldset>
+		<legend>Response</legend>
+		<div id="result-example1"></div>
+	</fieldset>
+	
+	<h3>Code:</h3>
+<pre>
+	
+	&lt;form  class="forms" name="example1-form">		
+		&lt;input type="submit" value="submit"/>
+		&lt;div id="resultForm-example1"> &lt;/div>
+	&lt;/form>
+
+	&lt;script type="text/javascript">
+
+		simplifyForm.register('[name="example1-form"]',{
+		    action:'example1-test1.txt',  
+		    method:"get",
+		    callback:function(response){               	        
+		        document.querySelector('#result-example1').innerHTML = response;	     
+		    },
+		    validator:function(data){       
+		    	document.querySelector('#result-example1').innerHTML = "wait, requisiting...";	     	      
+		    }
+		});
+
+	&lt;/script>
+
+</pre>
+
+
+<script type="text/javascript">
+
+	simplifyForm.register('[name="example1-form"]',{
+	    action:'example1-test1.txt',  
+	    method:"get",
+	    callback:function(response){               	        
+	        document.querySelector('#result-example1').innerHTML = response;	     
+	    },
+	    validator:function(data){       
+	    	document.querySelector('#result-example1').innerHTML = "wait, requisiting...";	     	      
+	    }
+	});
+
+</script>
+
+</body>
+</html>

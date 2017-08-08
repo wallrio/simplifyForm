@@ -1,0 +1,18 @@
+fieldset{
+	max-width: 300px;
+	min-height: 100px;
+	border:1px solid #ccc;
+}
+
+table {
+	border:1px solid #ccc;
+}table td{
+	padding: 5px;
+}table td:nth-child(1){	
+	background: #eee;
+	min-width: 100px;
+	font-weight: bold;
+}table td:nth-child(2){		
+	min-width: 100px;
+	font-style: italic;
+}

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title>simplifyForm</title>
+
+  <link rel="stylesheet" type="text/css" href="examples/style.css">
+</head>
+<body>
+
+	
+<h2>Example real:</h2>
+  <ul>
+    <li><a href="example1.html">Request data</a></li>
+    <li><a href="example2.html">Populate Form</a></li>
+  </ul>
+
+<br>
+ <hr>
+ <br>
+ 
+  <h2>Example of use:</h2>
+
+  <h3>Code:</h3>
+<pre>
+  
+  &lt;form class="forms" name="example1-form">    
+    &lt;input type="submit" value="submit"/>
+    &lt;div id="resultForm-example1"> &lt;/div>
+  &lt;/form>
+  
+  &lt;script type="text/javascript">
+
+    simplifyForm.register('[name="example1-form"]',{
+        action:'example1-test1.txt',  
+        method:"get",
+        callback:function(response){                        
+            document.querySelector('#result-example1').innerHTML = response;       
+        },
+        validator:function(data){       
+          document.querySelector('#result-example1').innerHTML = "wait, requisiting...";              
+        }
+    });
+
+  &lt;/script>
+
+</pre>
+
+<br>
+ <hr>
+ <br>
+ 
+
+<h2>Inclua a tag</h2>
+<pre>
+    &lt;script type="text/javascript" src="simplifyForm.js">&lt;/script>
+</pre>
+<br>
+
+<br>
+ <hr>
+ <br>
+ 
+
+<h2>API</h2>
+
+  <h3>simplifyForm.register(NAME_FORM,OPTIONS);</h3> 
+  <p>Para utilizar um formulário é necessário registra-lo antes de seu uso.</p>
+  
+  <br>
+
+
+  <strong>NAME_FORM:</strong>
+
+    <blockquote>
+      simplifyForm.register('[name="form-name"]',OPTIONS);
+    </blockquote>
+
+  <strong>OPTIONS:</strong>
+
+    <blockquote>
+        
+        <table>
+          <tr>
+            <td>action</td>
+            <td>string</td>
+            <td>destino da requisição</td>
+          </tr>
+          <tr>
+            <td>method</td>
+            <td>string</td>
+            <td>método de requisição (POST/GET)</td>
+          </tr>
+          <tr>
+            <td>callback</td>
+            <td>function</td>
+            <td>retorno da requisição</td>
+          </tr>
+          <tr>
+            <td>validator</td>
+            <td>function</td>
+            <td>validação antes do envio da requisição</td>
+          </tr>
+        </table>
+
+    </blockquote>
+
+
+
+    <br><br>
+
+     <h3>simplifyForm.submit(NAME_FORM);</h3> 
+  <p>Função para fazer a requisição do formuilário via javascript.</p>
+  
+  <br>
+
+
+    <blockquote>
+      simplifyForm.submit('[name="form-name"]');
+    </blockquote>
+
+
+
+
+
+    <br><br>
+
+     <h3>simplifyForm.change(NAME_FORM,CALLBACK);</h3> 
+  <p>Função para capturar mudanção nos inputs do formulário.</p>
+  
+  <br>
+
+
+    <blockquote>
+      simplifyForm.change('[name="form-name"]',function(inputElement){
+        // action to run
+      });
+    </blockquote>
+
+
+
+
+
+    <br><br>
+
+     <h3>simplifyForm.clear(NAME_FORM,INPUT_NAME);</h3> 
+  <p>Função para limpar os campos do formulário, ou um campo especifico.</p>
+  
+  <br>
+
+
+    <blockquote>
+      simplifyForm.clear('[name="form-name"]','[name="input-name"]');
+    </blockquote>
+
+  
+
+
+    <br><br>
+
+     <h3>simplifyForm.focus(NAME_FORM,INPUT_NAME);</h3> 
+  <p>Função para colocar um campo do formulário em foco, se o segundo parametro for ignorado, então o primeiro input terá o foco.</p>
+  
+  <br>
+
+
+    <blockquote>
+      simplifyForm.focus('[name="form-name"]','[name="input-name"]');
+    </blockquote>
+
+  
+
+
+    <br><br>
+
+     <h3>simplifyForm.populate(NAME_FORM,JSON_INPUTS,CALLBACK);</h3> 
+      <p>Função para preencher os campos do formulário.</p>
+  
+  <br>
+
+<strong>JSON_INPUTS:</strong>
+  <p>É obrigatório para o preenchimento, cada chave do JSON deve conter o name do input, e o valor da chave será o valor do input.</p>
+
+
+      <pre>
+      {
+        "name": "Wallace Rio",
+        "email": "wallrio@gmail.com",
+        "site": "[email] &lt;wallrio@gmail.com>",
+        "listbox": {
+          "item1": {
+            "title": "Item 1",
+            "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          },
+          "item2": {
+            "title": "Item 2",
+            "message": "Message from item 2"
+          }
+        },
+        "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      }
+      </pre>
+
+  
+      <strong>CALLBACK(elements):</strong>
+      <p>Função que será executada após o preenchimento do formulário, esta função tem um parametro que contém os elementos do formulário.</p>
+
+      <strong>elements</strong>
+      <p>É um parametro de retorno que contém os elementos do formulário, junto com seus valores, segue exemplo abaixo para utilizar-lo.</p>
+
+      <p>a função populate() manipula os elementos com base no JSON, caso aja um objeto como valor no JSON e o elemento seja um listbox, 
+      então o elemento será manipulado e será criado um membro com o nome data, este membro conterá os valores da lista.</p>
+      
+      <p>Para acessar o elemento apenas mencione elements ponto (.) o nome do input</p>
+
+      <strong>Example 1:</strong>
+
+      <p>Para:</p>
+      <pre>
+          {
+            "listbox": {
+              "item1": {
+                "title": "Item 1",
+                "message": "Message from item 1"
+              },
+              "item2": {
+                "title": "Item 2",
+                "message": "Message from item 2"
+              }
+            }
+          }
+      </pre>
+   
+      <pre>
+          function(elements){
+
+            alert(elements.name);
+            alert(elements.listbox.data.title);
+            alert(elements.listbox.data.message);
+
+          }
+      </pre>
+
+      <strong>Example 2:</strong>
+      <pre>
+          
+          simplifyForm.populate(NAME_FORM,JSON_INPUTS,function(elements){
+
+              elements.buttonCheckState.onclick = function(){
+                // run code javascript
+              }
+
+              elements.listbox.onclick = function(){
+                  var item = this.options[this.selectedIndex];
+                  
+                  document.querySelector('[name="addressee-name"]').value = item.data.title;
+                  document.querySelector('[name="addressee-from"]').value = item.data.from;
+                  document.querySelector('[name="addressee-to"]').value = item.data.to;
+                  document.querySelector('[name="addressee-subject"]').value = item.data.subject;
+                  document.querySelector('[name="addressee-message"]').value = item.data.message;
+              }
+          });
+
+
+      </pre>
+
+
+</body>
+</html>
